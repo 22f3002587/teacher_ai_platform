@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL = "http://127.0.0.1:8000/upload/"  # change if your backend runs elsewhere
+API_URL = "https://teacher-ai-platform-cgk7.onrender.com/upload/"
 
 st.set_page_config(page_title="AI Teaching Assistant", layout="wide")
 st.title("AI Teaching Assistant")
