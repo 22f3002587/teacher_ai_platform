@@ -2,8 +2,10 @@ import fitz
 from PIL import Image
 import pytesseract
 import io
+import shutil
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+tesseract_path = shutil.which("tesseract") or r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
 class DocumentParser:
     def parse(self, pdf_path: str):
@@ -18,12 +20,6 @@ class DocumentParser:
                 img = Image.open(io.BytesIO(pix.tobytes("png")))
                 text = pytesseract.image_to_string(img)
 
-            pages.append({
-                "page": page_number + 1,
-                "text": text
-            })
+            pages.append({"page": page_number + 1, "text": text})
 
-        return {
-            "num_pages": len(doc),
-            "pages": pages
-        }
+        return {"num_pages": len(doc), "pages": pages}
