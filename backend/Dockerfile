@@ -13,4 +13,6 @@ RUN uv sync --frozen
 
 EXPOSE 8000
 
-CMD uv run uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}
+WORKDIR /app/backend
+
+CMD uv run --project /app uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}
